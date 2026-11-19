@@ -1,4 +1,3 @@
-
 (() => {
   "use strict";
 
@@ -8,6 +7,7 @@
     erroNome: "Digite seu nome com pelo menos 2 letras.",
     erroEmail: "Digite um e-mail válido, como nome@exemplo.com.",
     erroMensagem: "Escreva uma mensagem com pelo menos 10 caracteres.",
+    erroForm: "Não foi possível enviar. Corrija os campos destacados e tente novamente.",
     enviado: "Mensagem enviada. Obrigado pelo contato!",
     projetoUm: "projeto exibido", projetoVarios: "projetos exibidos",
   };
@@ -133,6 +133,12 @@
   
   const form = document.getElementById("form-contato");
   const formStatus = document.getElementById("form-status");
+  const formErro = document.getElementById("form-erro");
+
+  const mostrarErroForm = (show) => {
+    formErro.hidden = !show;
+    formErro.textContent = show ? t("erroForm") : "";
+  };
 
   const rules = {
     nome: (v) => (v.trim().length < 2 ? t("erroNome") : ""),
@@ -144,6 +150,8 @@
     const message = rules[input.name](input.value);
     document.getElementById(`erro-${input.name}`).textContent = message;
     input.setAttribute("aria-invalid", String(Boolean(message)));
+    // quando todos os campos estiverem válidos, some o aviso geral
+    if (!form.querySelector('[aria-invalid="true"]')) mostrarErroForm(false);
     return !message;
   };
 
@@ -164,9 +172,13 @@
     const results = inputs.map(validateField);
     const firstInvalid = inputs[results.indexOf(false)];
 
-    if (firstInvalid) { firstInvalid.focus(); return; }
+    if (firstInvalid) {
+      mostrarErroForm(true);
+      firstInvalid.focus();
+      return;
+    }
 
-
+    mostrarErroForm(false);
     form.reset();
     inputs.forEach((i) => i.removeAttribute("aria-invalid"));
     formStatus.textContent = t("enviado");
@@ -180,6 +192,7 @@
       const input = form.elements[name];
       if (input.getAttribute("aria-invalid") === "true") validateField(input);
     });
+    if (!formErro.hidden) formErro.textContent = t("erroForm");
     if (formStatus.dataset.ok && formStatus.textContent) formStatus.textContent = t("enviado");
     if (status.textContent) applyFilter(document.querySelector(".filter.is-active").dataset.filter);
   });
