@@ -1,7 +1,6 @@
 (() => {
   "use strict";
 
- 
   const PT = {
     menuAbrir: "Abrir menu", menuFechar: "Fechar menu",
     erroNome: "Digite seu nome com pelo menos 2 letras.",
@@ -13,7 +12,97 @@
   };
   const t = (k) => (window.i18n ? window.i18n.t(k) : PT[k]);
 
- 
+
+  /* ============================================================
+     FORMULÁRIO DE CONTATO
+     Fica no topo de propósito: se qualquer outro trecho do script
+     der erro, a validação continua funcionando e a página não
+     recarrega.
+     ============================================================ */
+  const form = document.getElementById("form-contato");
+  const formStatus = document.getElementById("form-status");
+  const formErro = document.getElementById("form-erro");
+
+  if (form) {
+    const mostrarErroForm = (show) => {
+      if (!formErro) return;
+      formErro.hidden = !show;
+      formErro.textContent = show ? t("erroForm") : "";
+      if (show) {
+        // reinicia a animação de tremida a cada novo erro
+        formErro.style.animation = "none";
+        void formErro.offsetWidth;
+        formErro.style.animation = "";
+      }
+    };
+
+    const rules = {
+      nome: (v) => (v.trim().length < 2 ? t("erroNome") : ""),
+      email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : t("erroEmail")),
+      mensagem: (v) => (v.trim().length < 10 ? t("erroMensagem") : ""),
+    };
+
+    const validateField = (input) => {
+      const message = rules[input.name](input.value);
+      const alvo = document.getElementById(`erro-${input.name}`);
+      if (alvo) alvo.textContent = message;
+      input.setAttribute("aria-invalid", String(Boolean(message)));
+      // quando todos os campos estiverem válidos, some o aviso geral
+      if (!form.querySelector('[aria-invalid="true"]')) mostrarErroForm(false);
+      return !message;
+    };
+
+    const inputs = Object.keys(rules).map((name) => form.elements[name]);
+
+    inputs.forEach((input) => {
+      input.addEventListener("blur", () => validateField(input));
+      input.addEventListener("input", () => {
+        if (input.getAttribute("aria-invalid") === "true") validateField(input);
+      });
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); // impede o recarregamento da página
+
+      if (formStatus) {
+        formStatus.textContent = "";
+        delete formStatus.dataset.ok;
+      }
+
+      const results = inputs.map(validateField);
+      const firstInvalid = inputs[results.indexOf(false)];
+
+      if (firstInvalid) {
+        mostrarErroForm(true);
+        firstInvalid.focus();
+        return;
+      }
+
+      mostrarErroForm(false);
+      form.reset();
+      inputs.forEach((i) => i.removeAttribute("aria-invalid"));
+      if (formStatus) {
+        formStatus.textContent = t("enviado");
+        formStatus.dataset.ok = "1";
+      }
+    });
+
+    // troca de idioma: atualiza as mensagens que já estão na tela
+    document.addEventListener("idiomachange", () => {
+      inputs.forEach((input) => {
+        if (input.getAttribute("aria-invalid") === "true") validateField(input);
+      });
+      if (formErro && !formErro.hidden) formErro.textContent = t("erroForm");
+      if (formStatus && formStatus.dataset.ok && formStatus.textContent) {
+        formStatus.textContent = t("enviado");
+      }
+    });
+  }
+
+
+  /* ============================================================
+     ANIMAÇÃO DE ENTRADA (reveal)
+     ============================================================ */
   if ("IntersectionObserver" in window) {
     document.documentElement.classList.add("js");
 
@@ -23,7 +112,7 @@
 
     targets.forEach((el) => {
       el.classList.add("reveal");
-    
+
       if (el.classList.contains("card")) {
         const index = [...el.parentElement.children].indexOf(el);
         el.style.setProperty("--d", `${index * 120}ms`);
@@ -42,6 +131,9 @@
   }
 
 
+  /* ============================================================
+     NOME DIGITANDO
+     ============================================================ */
   (() => {
     const typed = document.querySelector(".hero .typed");
     const rest = document.querySelector(".hero .rest");
@@ -67,7 +159,10 @@
     setTimeout(next, 700);
   })();
 
- 
+
+  /* ============================================================
+     MENU
+     ============================================================ */
   const navToggle = document.querySelector(".nav-toggle");
   const menu = document.getElementById("menu");
 
@@ -76,7 +171,7 @@
     navToggle.querySelector(".visually-hidden").textContent = open ? t("menuFechar") : t("menuAbrir");
     menu.dataset.open = String(open);
   };
-  setMenu(false); // 
+  setMenu(false);
 
   navToggle.addEventListener("click", () => {
     setMenu(navToggle.getAttribute("aria-expanded") !== "true");
@@ -86,7 +181,10 @@
     if (e.key === "Escape" && menu.dataset.open === "true") { setMenu(false); navToggle.focus(); }
   });
 
- 
+
+  /* ============================================================
+     LINK ATIVO NO MENU
+     ============================================================ */
   const links = [...menu.querySelectorAll("a")];
   const sections = links.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
 
@@ -103,7 +201,10 @@
     sections.forEach((s) => observer.observe(s));
   }
 
- 
+
+  /* ============================================================
+     FILTRO DE PROJETOS
+     ============================================================ */
   const filterBtns = document.querySelectorAll(".filter");
   const cards = document.querySelectorAll(".card");
   const status = document.getElementById("filtro-status");
@@ -125,79 +226,20 @@
 
   filterBtns.forEach((btn) => btn.addEventListener("click", () => applyFilter(btn.dataset.filter)));
 
- 
   document.querySelectorAll("[data-go]").forEach((a) =>
     a.addEventListener("click", () => applyFilter(a.dataset.go))
   );
 
-  
-  const form = document.getElementById("form-contato");
-  const formStatus = document.getElementById("form-status");
-  const formErro = document.getElementById("form-erro");
-
-  const mostrarErroForm = (show) => {
-    formErro.hidden = !show;
-    formErro.textContent = show ? t("erroForm") : "";
-  };
-
-  const rules = {
-    nome: (v) => (v.trim().length < 2 ? t("erroNome") : ""),
-    email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : t("erroEmail")),
-    mensagem: (v) => (v.trim().length < 10 ? t("erroMensagem") : ""),
-  };
-
-  const validateField = (input) => {
-    const message = rules[input.name](input.value);
-    document.getElementById(`erro-${input.name}`).textContent = message;
-    input.setAttribute("aria-invalid", String(Boolean(message)));
-    // quando todos os campos estiverem válidos, some o aviso geral
-    if (!form.querySelector('[aria-invalid="true"]')) mostrarErroForm(false);
-    return !message;
-  };
-
-  Object.keys(rules).forEach((name) => {
-    const input = form.elements[name];
-    input.addEventListener("blur", () => validateField(input));
-    input.addEventListener("input", () => {
-      if (input.getAttribute("aria-invalid") === "true") validateField(input);
-    });
-  });
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    formStatus.textContent = "";
-    delete formStatus.dataset.ok;
-
-    const inputs = Object.keys(rules).map((name) => form.elements[name]);
-    const results = inputs.map(validateField);
-    const firstInvalid = inputs[results.indexOf(false)];
-
-    if (firstInvalid) {
-      mostrarErroForm(true);
-      firstInvalid.focus();
-      return;
-    }
-
-    mostrarErroForm(false);
-    form.reset();
-    inputs.forEach((i) => i.removeAttribute("aria-invalid"));
-    formStatus.textContent = t("enviado");
-    formStatus.dataset.ok = "1";
-  });
-
-
+  // troca de idioma: menu e filtro
   document.addEventListener("idiomachange", () => {
     setMenu(navToggle.getAttribute("aria-expanded") === "true");
-    Object.keys(rules).forEach((name) => {
-      const input = form.elements[name];
-      if (input.getAttribute("aria-invalid") === "true") validateField(input);
-    });
-    if (!formErro.hidden) formErro.textContent = t("erroForm");
-    if (formStatus.dataset.ok && formStatus.textContent) formStatus.textContent = t("enviado");
     if (status.textContent) applyFilter(document.querySelector(".filter.is-active").dataset.filter);
   });
 
- 
+
+  /* ============================================================
+     DIÁLOGO DAS ATIVIDADES
+     ============================================================ */
   const dialog = document.getElementById("atividade-dialog");
   if (dialog && typeof dialog.showModal === "function") {
     const media = dialog.querySelector(".dialog-media");
