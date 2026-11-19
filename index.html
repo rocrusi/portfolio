@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
-  <script src="script.js?v=5" defer></script>
+  <link rel="stylesheet" href="style.css?v=8">
+  <script src="script.js?v=6" defer></script>
 </head>
 <body>
 
@@ -225,8 +225,8 @@
   </footer>
 
  
+  <!-- Idiomas (PT / EN) -->
   <script>
-
 (() => {
   "use strict";
 
@@ -304,6 +304,80 @@
 
   const salvo = lerSalvo();
   if (salvo === "en") aplicar("en", { emitir: false });
+})();
+  </script>
+
+  <!-- Validação do formulário de contato (funciona mesmo sem o script.js) -->
+  <script>
+(() => {
+  const form = document.getElementById("form-contato");
+  if (!form) return;
+  form.dataset.pronto = "1"; // avisa o script.js para não duplicar
+
+  const formStatus = document.getElementById("form-status");
+  const formErro = document.getElementById("form-erro");
+  const t = (k) => window.i18n.t(k);
+
+  const rules = {
+    nome: (v) => (v.trim().length < 2 ? t("erroNome") : ""),
+    email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : t("erroEmail")),
+    mensagem: (v) => (v.trim().length < 10 ? t("erroMensagem") : ""),
+  };
+
+  const mostrarErroForm = (show) => {
+    formErro.hidden = !show;
+    formErro.textContent = show ? t("erroForm") : "";
+    if (show) {
+      formErro.style.animation = "none";
+      void formErro.offsetWidth;
+      formErro.style.animation = "";
+    }
+  };
+
+  const validateField = (input) => {
+    const message = rules[input.name](input.value);
+    document.getElementById("erro-" + input.name).textContent = message;
+    input.setAttribute("aria-invalid", String(Boolean(message)));
+    if (!form.querySelector('[aria-invalid="true"]')) mostrarErroForm(false);
+    return !message;
+  };
+
+  const inputs = Object.keys(rules).map((n) => form.elements[n]);
+
+  inputs.forEach((input) => {
+    input.addEventListener("blur", () => validateField(input));
+    input.addEventListener("input", () => {
+      if (input.getAttribute("aria-invalid") === "true") validateField(input);
+    });
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    formStatus.textContent = "";
+    delete formStatus.dataset.ok;
+
+    const results = inputs.map(validateField);
+    const firstInvalid = inputs[results.indexOf(false)];
+    if (firstInvalid) {
+      mostrarErroForm(true);
+      firstInvalid.focus();
+      return;
+    }
+
+    mostrarErroForm(false);
+    form.reset();
+    inputs.forEach((i) => i.removeAttribute("aria-invalid"));
+    formStatus.textContent = t("enviado");
+    formStatus.dataset.ok = "1";
+  });
+
+  document.addEventListener("idiomachange", () => {
+    inputs.forEach((i) => {
+      if (i.getAttribute("aria-invalid") === "true") validateField(i);
+    });
+    if (!formErro.hidden) formErro.textContent = t("erroForm");
+    if (formStatus.dataset.ok) formStatus.textContent = t("enviado");
+  });
 })();
   </script>
 </body>
