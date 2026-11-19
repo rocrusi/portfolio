@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  // Traduções (i18n.js). Se o i18n.js não estiver na página, usa o português.
+ 
   const PT = {
     menuAbrir: "Abrir menu", menuFechar: "Fechar menu",
     erroNome: "Digite seu nome com pelo menos 2 letras.",
@@ -13,8 +13,7 @@
   };
   const t = (k) => (window.i18n ? window.i18n.t(k) : PT[k]);
 
-  /* ---------- 0. Revelar conteúdo ao rolar a página ---------- */
-  // Só esconde os elementos se o JS estiver rodando; sem JS, tudo aparece normalmente.
+ 
   if ("IntersectionObserver" in window) {
     document.documentElement.classList.add("js");
 
@@ -24,7 +23,7 @@
 
     targets.forEach((el) => {
       el.classList.add("reveal");
-      // Cards entram em sequência (atraso pequeno entre um e outro)
+    
       if (el.classList.contains("card")) {
         const index = [...el.parentElement.children].indexOf(el);
         el.style.setProperty("--d", `${index * 120}ms`);
@@ -42,8 +41,7 @@
     targets.forEach((el) => revealObserver.observe(el));
   }
 
-  /* ---------- 1. Nome digitado ---------- */
-  // Escreve "Pedro Kalil" letra por letra; ao terminar, o cursor passa a piscar.
+
   (() => {
     const typed = document.querySelector(".hero .typed");
     const rest = document.querySelector(".hero .rest");
@@ -69,7 +67,7 @@
     setTimeout(next, 700);
   })();
 
-  /* ---------- 2. Menu mobile ---------- */
+ 
   const navToggle = document.querySelector(".nav-toggle");
   const menu = document.getElementById("menu");
 
@@ -78,7 +76,7 @@
     navToggle.querySelector(".visually-hidden").textContent = open ? t("menuFechar") : t("menuAbrir");
     menu.dataset.open = String(open);
   };
-  setMenu(false); // define o texto inicial já no idioma salvo
+  setMenu(false); // 
 
   navToggle.addEventListener("click", () => {
     setMenu(navToggle.getAttribute("aria-expanded") !== "true");
@@ -88,7 +86,7 @@
     if (e.key === "Escape" && menu.dataset.open === "true") { setMenu(false); navToggle.focus(); }
   });
 
-  /* ---------- 3. Link ativo conforme a rolagem ---------- */
+ 
   const links = [...menu.querySelectorAll("a")];
   const sections = links.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
 
@@ -105,7 +103,7 @@
     sections.forEach((s) => observer.observe(s));
   }
 
-  /* ---------- 4. Filtro de projetos ---------- */
+ 
   const filterBtns = document.querySelectorAll(".filter");
   const cards = document.querySelectorAll(".card");
   const status = document.getElementById("filtro-status");
@@ -127,12 +125,12 @@
 
   filterBtns.forEach((btn) => btn.addEventListener("click", () => applyFilter(btn.dataset.filter)));
 
-  // Atalhos do hero já aplicam o filtro correspondente
+ 
   document.querySelectorAll("[data-go]").forEach((a) =>
     a.addEventListener("click", () => applyFilter(a.dataset.go))
   );
 
-  /* ---------- 5. Formulário de contato ---------- */
+  
   const form = document.getElementById("form-contato");
   const formStatus = document.getElementById("form-status");
 
@@ -168,14 +166,14 @@
 
     if (firstInvalid) { firstInvalid.focus(); return; }
 
-    /* Sem back-end: aqui você conectaria um serviço (Formspree, EmailJS, API própria...). */
+
     form.reset();
     inputs.forEach((i) => i.removeAttribute("aria-invalid"));
     formStatus.textContent = t("enviado");
     formStatus.dataset.ok = "1";
   });
 
-  /* ---------- Troca de idioma: atualiza textos gerados por script ---------- */
+
   document.addEventListener("idiomachange", () => {
     setMenu(navToggle.getAttribute("aria-expanded") === "true");
     Object.keys(rules).forEach((name) => {
@@ -186,7 +184,7 @@
     if (status.textContent) applyFilter(document.querySelector(".filter.is-active").dataset.filter);
   });
 
-  /* ---------- 6. Atividades: clicar na foto abre a janela de detalhes ---------- */
+ 
   const dialog = document.getElementById("atividade-dialog");
   if (dialog && typeof dialog.showModal === "function") {
     const media = dialog.querySelector(".dialog-media");
