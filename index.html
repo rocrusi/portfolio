@@ -1,0 +1,327 @@
+index.html
+100%
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Pedro Kalil | Software Engineering Student">Pedro Kalil | Estudante de Engenharia de Software</title>
+  <meta name="description" content="Portfólio de Pedro Kalil, estudante de Engenharia de Software com foco em Java" data-en-content="Portfolio of Pedro Kalil, a Software Engineering student focused on Java">
+  <meta name="color-scheme" content="light">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js?v=4" defer></script>
+</head>
+<body>
+  <!--
+    TRADUÇÃO PT / EN
+    Todo texto que muda de idioma tem o inglês guardado num atributo:
+      data-en="..."               -> troca o texto do elemento
+      data-en-aria-label="..."    -> troca o atributo aria-label (idem alt, content, data-titulo...)
+    O texto que está escrito no HTML é o português.
+  -->
+  <a class="skip-link" href="#conteudo" data-en="Skip to main content">Ir para o conteúdo principal</a>
+
+  <!-- Moldura decorativa (canto superior esquerdo) -->
+  <div class="frame frame--tl" aria-hidden="true"></div>
+
+  <!-- ============ CABEÇALHO ============ -->
+  <header class="site-header">
+    <a class="logo" href="#inicio" aria-label="Pedro Kalil, ir para o início" data-en-aria-label="Pedro Kalil, go to top">PK</a>
+
+    <!-- Troca de idioma -->
+    <div class="lang" role="group" aria-label="Idioma" data-en-aria-label="Language">
+      <button type="button" data-lang="pt" aria-pressed="true" lang="pt-BR" title="Português"><span class="visually-hidden">Português </span><span aria-hidden="true">PT</span></button>
+      <button type="button" data-lang="en" aria-pressed="false" lang="en" title="English"><span class="visually-hidden">English </span><span aria-hidden="true">EN</span></button>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="visually-hidden">Abrir menu</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+
+    <nav class="nav" aria-label="Navegação principal" data-en-aria-label="Main navigation">
+      <ul id="menu" class="nav-list">
+        <li><a href="#sobre" data-en="About me">Sobre mim</a></li>
+        <li><a href="#conhecimentos" data-en="Skills">Conhecimentos</a></li>
+        <li><a href="#projetos" data-en="Projects">Projetos</a></li>
+        <li><a href="#contato" data-en="Contact">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- ============ INÍCIO ============ -->
+    <section id="inicio" class="hero" aria-labelledby="titulo-hero">
+      <div class="hero-main">
+        <div class="name-row">
+          <h1 id="titulo-hero"><span class="visually-hidden">Pedro Kalil</span><span class="nome" aria-hidden="true"><span class="typed">Pedro Kalil</span><span class="cursor"></span><span class="rest"></span></span></h1>
+          <div class="social-box">
+          <p id="social-title" class="social-title"><span data-en="Socials">Redes</span> <span data-en=" ">Sociais</span></p>
+          <ul class="social" aria-labelledby="social-title">
+            <li><a href="https://www.instagram.com/pkalil_007/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (abre em nova aba)" data-en-aria-label="Instagram (opens in a new tab)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/in/pedro-kalil-b2a1673b1/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (abre em nova aba)" data-en-aria-label="LinkedIn (opens in a new tab)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v6M8 7.5v.01M12 17v-6M12 13.5c0-1.4 1-2.5 2.5-2.5S17 12 17 13.5V17"/></svg></a></li>
+            <li><a href="https://github.com/rocrusi" target="_blank" rel="noopener noreferrer" aria-label="GitHub (abre em nova aba)" data-en-aria-label="GitHub (opens in a new tab)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></a></li>
+          </ul>
+          </div>
+        </div>
+        <p class="hero-role" data-en="Developer in training / Software Engineering student">Estudante de Desenvolvimento em formação / Engenharia de Software</p>
+        <a class="btn-ver" href="#projetos" data-en="View projects">Ver projetos</a>
+      </div>
+    </section>
+
+    <!-- ============ SOBRE MIM ============ -->
+    <section id="sobre" class="section" aria-labelledby="titulo-sobre">
+      <h2 id="titulo-sobre" data-en="About me">Sobre mim</h2>
+      <p class="statement" data-en="Hi! I'm a Software Engineering student, focused on improving my programming and skills in robotics.">Olá! Sou estudante de Engenharia de Software, focado em aprimorar minhas habilidades em programação e robótica.</p>
+    </section>
+
+    <!-- ============ CONHECIMENTOS ============ -->
+    <section id="conhecimentos" class="section section--stack" aria-labelledby="titulo-conhecimentos">
+      <h2 id="titulo-conhecimentos" data-en="Skills">Conhecimentos</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="titulo-conhecimentos">
+        <table>
+          <caption class="visually-hidden" data-en="Skills, proficiency level, and where each one is applied">Habilidades, nível de domínio e onde cada uma é aplicada</caption>
+          <thead>
+            <tr>
+              <th scope="col" data-en="Skill">Habilidade</th>
+              <th scope="col" data-en="Level">Nível</th>
+              <th scope="col" data-en="Applied in">Aplicação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Java</th>
+              <td><span class="level" data-en="Intermediate">Intermediário</span></td>
+              <td data-en="Programming logic and backend development">Lógica de programação e desenvolvimento backend</td>
+            </tr>
+            <tr>
+              <th scope="row" data-en="English">Inglês</th>
+              <td><span class="level" data-en="Advanced">Avançado</span></td>
+              <td data-en="Reading technical documentation and communication">Leitura de documentação técnica e comunicação</td>
+            </tr>
+            <tr>
+              <th scope="row">HTML / CSS/Javascript</th>
+              <td><span class="level" data-en="Basic / Intermediate">Básico / Intermediário</span></td>
+              <td data-en="Structuring and styling web pages">Estruturação e estilização de páginas web</td>
+            </tr>
+            <tr>
+              <th scope="row">C++</th>
+              <td><span class="level" data-en="Intermediate">Intermediário</span></td>
+              <td data-en="Programming logic and development applied to embedded systems.">Lógica de programação,desenvolvimento aplicado a sistemas embarcados.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ PROJETOS (filtráveis, cada card leva ao repositório no GitHub) ============ -->
+    <section id="projetos" class="section" aria-labelledby="titulo-projetos">
+      <h2 id="titulo-projetos" data-en="Projects">Projetos</h2>
+
+      <div class="filters" role="group" aria-label="Filtrar projetos por categoria" data-en-aria-label="Filter projects by category">
+        <button type="button" class="filter is-active" data-filter="all" aria-pressed="true" data-en="All">Todos</button>
+        <button type="button" class="filter" data-filter="java" aria-pressed="false">Java</button>
+        <button type="button" class="filter" data-filter="C++" aria-pressed="false">C++</button>
+      </div>
+      <p id="filtro-status" class="visually-hidden" role="status" aria-live="polite"></p>
+
+      <!-- Troque cada href pelo link do repositório do projeto (ex.: https://github.com/rocrusi/nome-do-repo) -->
+      <ul class="cards">
+        <li class="card" data-category="java">
+          <article>
+            <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Atv.poo</span></div>
+            <h3><a href="https://github.com/rocrusi/gitVideo/blob/main/Atividade%20POO" target="_blank" rel="noopener noreferrer"><span data-en="Java payment system">Sistema de pagamentos em Java</span><span class="visually-hidden" data-en=" (opens the GitHub repository in a new tab)"> (abre o repositório no GitHub em nova aba)</span></a></h3>
+            <p class="tag">Java</p>
+            <p data-en="Simple program, applying OOP concepts for a payment system.">Programa simples aplicando conceitos de POO para um sistema de pagamentos.</p>
+          </article>
+        </li>
+        <li class="card" data-category="C++">
+          <article>
+            <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span data-en="Ultrasonic sensor logic">Lógica de sensor ultrassônico</span></div>
+            <h3><a href="https://github.com/rocrusi/Test/blob/main/src/entidades/HCRS04(sem%20interrupt)" target="_blank" rel="noopener noreferrer"><span data-en="Ultrasonic sensor logic">Lógica de sensor ultrassônico</span><span class="visually-hidden" data-en=" (opens the GitHub repository in a new tab)"> (abre o repositório no GitHub em nova aba)</span></a></h3>
+            <p class="tag">C++</p>
+            <p data-en="Logic implementation to control an ultrasonic sensor on a line-following robot.">Implementação de lógica para controle de sensor ultrassônico em seguidor de linha.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ ATIVIDADES ============ -->
+    <section id="atividades" class="section" aria-labelledby="titulo-atividades">
+      <h2 id="titulo-atividades" data-en="Activities">Atividades</h2>
+      <!--
+        Cada foto é um botão: ao clicar, abre a janela de detalhes com o conteúdo dos data-*.
+        Para o inglês, preencha data-en-data-titulo, data-en-data-data e data-en-data-descricao
+        (traduções do título, data e descrição), data-en-alt na imagem e data-en na legenda.
+        Para mais fotos, copie um <li> inteiro.
+      -->
+      <ul class="gallery">
+        <li><figure>
+          <button type="button" class="foto-btn"
+                  data-titulo="Título da atividade 1"
+                  data-data="Data da atividade"
+                  data-descricao="Hackathon na UCSAL, onde desenvolvemos um protótipo que detectava mudanças na qualidade do ar em tempo real, utilizando sensores e uma aplicação web para monitoramento."
+                  data-en-data-titulo="Activity 1 title"
+                  data-en-data-data="Activity date"
+                  data-en-data-descricao="Hackathon at UCSAL, where we built a prototype that detected changes in air quality in real time, using sensors and a web application for monitoring.">
+            <img src="fotos/hksu.jpg" alt="Equipe apresentando o projeto no hackathon" data-en-alt="Team presenting the project at the hackathon" loading="lazy">
+            <span class="visually-hidden" data-en="View details: UCSAL Hackathon.">Ver detalhes: UCSAL Hackathon.</span>
+          </button>
+          <figcaption>UCSAL Hackathon</figcaption>
+        </figure></li>
+        <li><figure>
+          <button type="button" class="foto-btn"
+                  data-titulo="Título da atividade 2"
+                  data-data="Data da atividade"
+                  data-descricao="Escreva aqui os detalhes: o que foi feito, onde aconteceu, o que você aprendeu."
+                  data-en-data-titulo="Activity 2 title"
+                  data-en-data-data="Activity date"
+                  data-en-data-descricao="Write the details here: what was done, where it happened, what you learned.">
+          <img src="fotos/robotica.jpg" alt="Equipe fazendo a manutenção do robô" data-en-alt="Team doing maintenance on the robot" loading="lazy">
+            <span class="visually-hidden" data-en="View details: UFRB Robotics Championship">Ver detalhes: Campeonato UFRB de robótica</span>
+          </button>
+          <figcaption data-en="UFRB Robotics Championship">Campeonato UFRB de robótica</figcaption>
+        </figure></li>
+      </ul>
+    </section>
+
+    <!-- ============ CONTATO ============ -->
+    <section id="contato" class="section section--stack" aria-labelledby="titulo-contato">
+      <h2 id="titulo-contato" data-en="Contact">Contato</h2>
+      <form id="form-contato" class="form" novalidate>
+        <div class="field">
+          <label for="nome" data-en="Name">Nome</label>
+          <input id="nome" name="nome" type="text" autocomplete="name" required aria-describedby="erro-nome">
+          <p id="erro-nome" class="error" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="email" data-en="Email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="erro-email">
+          <p id="erro-email" class="error" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="mensagem" data-en="Message">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required aria-describedby="erro-mensagem"></textarea>
+          <p id="erro-mensagem" class="error" aria-live="polite"></p>
+        </div>
+        <button type="submit" class="btn" data-en="Send message">Enviar mensagem</button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- ============ JANELA DE DETALHES DA ATIVIDADE ============ -->
+  <dialog id="atividade-dialog" class="dialog" aria-labelledby="atividade-titulo">
+    <button type="button" class="dialog-close" aria-label="Fechar detalhes" data-en-aria-label="Close details">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="dialog-media"></div>
+    <div class="dialog-body">
+      <h3 id="atividade-titulo"></h3>
+      <p class="dialog-data tag"></p>
+      <p class="dialog-descricao"></p>
+    </div>
+  </dialog>
+
+  <!-- ============ RODAPÉ ============ -->
+  <footer class="site-footer">
+    
+    <div class="frame frame--br" aria-hidden="true"></div>
+  </footer>
+
+  <!-- Troca de idioma PT/EN (embutida aqui para não depender de outro arquivo) -->
+  <script>
+/* =========================================================
+   Troca de idioma PT / EN
+   - O texto escrito no HTML é o português.
+   - O inglês fica em atributos: data-en="..." (texto) e data-en-<atributo>="..."
+     (ex.: data-en-aria-label, data-en-alt, data-en-content, data-en-data-titulo).
+   - A escolha fica salva no navegador.
+   - Mensagens geradas pelo script.js (erros do formulário etc.) estão em "mensagens".
+   ========================================================= */
+(() => {
+  "use strict";
+
+  const mensagens = {
+    pt: {
+      menuAbrir: "Abrir menu",
+      menuFechar: "Fechar menu",
+      erroNome: "Digite seu nome com pelo menos 2 letras.",
+      erroEmail: "Digite um e-mail válido, como nome@exemplo.com.",
+      erroMensagem: "Escreva uma mensagem com pelo menos 10 caracteres.",
+      enviado: "Mensagem enviada. Obrigado pelo contato!",
+      projetoUm: "projeto exibido",
+      projetoVarios: "projetos exibidos",
+    },
+    en: {
+      menuAbrir: "Open menu",
+      menuFechar: "Close menu",
+      erroNome: "Enter your name with at least 2 letters.",
+      erroEmail: "Enter a valid email, like name@example.com.",
+      erroMensagem: "Write a message with at least 10 characters.",
+      enviado: "Message sent. Thanks for getting in touch!",
+      projetoUm: "project shown",
+      projetoVarios: "projects shown",
+    },
+  };
+
+  const KEY = "idioma";
+  const htmlLang = { pt: "pt-BR", en: "en" };
+  let atual = "pt";
+
+  const lerSalvo = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
+  const salvar = (v) => { try { localStorage.setItem(KEY, v); } catch { /* sem armazenamento: tudo bem */ } };
+
+  // Guarda o original (português) de cada elemento que tem tradução
+  const itens = [];
+  document.querySelectorAll("*").forEach((el) => {
+    for (const attr of el.attributes) {
+      if (attr.name === "data-en") {
+        itens.push({ el, alvo: null, pt: el.textContent, en: attr.value });
+      } else if (attr.name.startsWith("data-en-")) {
+        const alvo = attr.name.slice(8);
+        itens.push({ el, alvo, pt: el.getAttribute(alvo), en: attr.value });
+      }
+    }
+  });
+
+  const aplicar = (lang, { emitir = true } = {}) => {
+    atual = lang;
+    itens.forEach(({ el, alvo, pt, en }) => {
+      const valor = lang === "en" ? en : pt;
+      if (alvo === null) el.textContent = valor; else el.setAttribute(alvo, valor);
+    });
+    document.documentElement.lang = htmlLang[lang];
+    document.querySelectorAll(".lang [data-lang]").forEach((b) =>
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang))
+    );
+    if (emitir) document.dispatchEvent(new CustomEvent("idiomachange", { detail: lang }));
+  };
+
+  // API usada pelo script.js
+  window.i18n = {
+    t: (chave) => (mensagens[atual] && mensagens[atual][chave]) || mensagens.pt[chave] || chave,
+    get lang() { return atual; },
+  };
+
+  document.querySelectorAll(".lang [data-lang]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      if (btn.dataset.lang === atual) return;
+      aplicar(btn.dataset.lang);
+      salvar(btn.dataset.lang);
+    })
+  );
+
+  const salvo = lerSalvo();
+  if (salvo === "en") aplicar("en", { emitir: false });
+})();
+  </script>
+</body>
+</html>
+Exibindo style.js…
