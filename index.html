@@ -16,22 +16,17 @@
 </head>
 <body>
   <!--
-    TRADUÇÃO PT / EN
-    Todo texto que muda de idioma tem o inglês guardado num atributo:
-      data-en="..."               -> troca o texto do elemento
-      data-en-aria-label="..."    -> troca o atributo aria-label (idem alt, content, data-titulo...)
-    O texto que está escrito no HTML é o português.
-  -->
+  
   <a class="skip-link" href="#conteudo" data-en="Skip to main content">Ir para o conteúdo principal</a>
 
-  <!-- Moldura decorativa (canto superior esquerdo) -->
+ 
   <div class="frame frame--tl" aria-hidden="true"></div>
 
-  <!-- ============ CABEÇALHO ============ -->
+ 
   <header class="site-header">
     <a class="logo" href="#inicio" aria-label="Pedro Kalil, ir para o início" data-en-aria-label="Pedro Kalil, go to top">PK</a>
 
-    <!-- Troca de idioma -->
+    
     <div class="lang" role="group" aria-label="Idioma" data-en-aria-label="Language">
       <button type="button" data-lang="pt" aria-pressed="true" lang="pt-BR" title="Português"><span class="visually-hidden">Português </span><span aria-hidden="true">PT</span></button>
       <button type="button" data-lang="en" aria-pressed="false" lang="en" title="English"><span class="visually-hidden">English </span><span aria-hidden="true">EN</span></button>
@@ -53,7 +48,7 @@
   </header>
 
   <main id="conteudo">
-    <!-- ============ INÍCIO ============ -->
+ 
     <section id="inicio" class="hero" aria-labelledby="titulo-hero">
       <div class="hero-main">
         <div class="name-row">
@@ -75,13 +70,13 @@
       </div>
     </section>
 
-    <!-- ============ SOBRE MIM ============ -->
+ 
     <section id="sobre" class="section" aria-labelledby="titulo-sobre">
       <h2 id="titulo-sobre" data-en="About me">Sobre mim</h2>
       <p class="statement" data-en="Hi! I'm a Software Engineering student, focused on improving my programming and skills in robotics.">Olá! Sou estudante de Engenharia de Software, focado em aprimorar minhas habilidades em programação e robótica.</p>
     </section>
 
-    <!-- ============ CONHECIMENTOS ============ -->
+
     <section id="conhecimentos" class="section section--stack" aria-labelledby="titulo-conhecimentos">
       <h2 id="titulo-conhecimentos" data-en="Skills">Conhecimentos</h2>
       <div class="table-wrap" tabindex="0" role="region" aria-labelledby="titulo-conhecimentos">
@@ -120,7 +115,7 @@
       </div>
     </section>
 
-    <!-- ============ PROJETOS (filtráveis, cada card leva ao repositório no GitHub) ============ -->
+   
     <section id="projetos" class="section" aria-labelledby="titulo-projetos">
       <h2 id="titulo-projetos" data-en="Projects">Projetos</h2>
 
@@ -131,7 +126,7 @@
       </div>
       <p id="filtro-status" class="visually-hidden" role="status" aria-live="polite"></p>
 
-      <!-- Troque cada href pelo link do repositório do projeto (ex.: https://github.com/rocrusi/nome-do-repo) -->
+      
       <ul class="cards">
         <li class="card" data-category="java">
           <article>
@@ -152,15 +147,10 @@
       </ul>
     </section>
 
-    <!-- ============ ATIVIDADES ============ -->
+ 
     <section id="atividades" class="section" aria-labelledby="titulo-atividades">
       <h2 id="titulo-atividades" data-en="Activities">Atividades</h2>
-      <!--
-        Cada foto é um botão: ao clicar, abre a janela de detalhes com o conteúdo dos data-*.
-        Para o inglês, preencha data-en-data-titulo, data-en-data-data e data-en-data-descricao
-        (traduções do título, data e descrição), data-en-alt na imagem e data-en na legenda.
-        Para mais fotos, copie um <li> inteiro.
-      -->
+    
       <ul class="gallery">
         <li><figure>
           <button type="button" class="foto-btn"
@@ -191,7 +181,7 @@
       </ul>
     </section>
 
-    <!-- ============ CONTATO ============ -->
+  
     <section id="contato" class="section section--stack" aria-labelledby="titulo-contato">
       <h2 id="titulo-contato" data-en="Contact">Contato</h2>
       <form id="form-contato" class="form" novalidate>
@@ -216,7 +206,7 @@
     </section>
   </main>
 
-  <!-- ============ JANELA DE DETALHES DA ATIVIDADE ============ -->
+
   <dialog id="atividade-dialog" class="dialog" aria-labelledby="atividade-titulo">
     <button type="button" class="dialog-close" aria-label="Fechar detalhes" data-en-aria-label="Close details">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -229,22 +219,15 @@
     </div>
   </dialog>
 
-  <!-- ============ RODAPÉ ============ -->
+
   <footer class="site-footer">
     
     <div class="frame frame--br" aria-hidden="true"></div>
   </footer>
 
-  <!-- Troca de idioma PT/EN (embutida aqui para não depender de outro arquivo) -->
+ 
   <script>
-/* =========================================================
-   Troca de idioma PT / EN
-   - O texto escrito no HTML é o português.
-   - O inglês fica em atributos: data-en="..." (texto) e data-en-<atributo>="..."
-     (ex.: data-en-aria-label, data-en-alt, data-en-content, data-en-data-titulo).
-   - A escolha fica salva no navegador.
-   - Mensagens geradas pelo script.js (erros do formulário etc.) estão em "mensagens".
-   ========================================================= */
+
 (() => {
   "use strict";
 
@@ -278,7 +261,7 @@
   const lerSalvo = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
   const salvar = (v) => { try { localStorage.setItem(KEY, v); } catch { /* sem armazenamento: tudo bem */ } };
 
-  // Guarda o original (português) de cada elemento que tem tradução
+
   const itens = [];
   document.querySelectorAll("*").forEach((el) => {
     for (const attr of el.attributes) {
@@ -304,7 +287,7 @@
     if (emitir) document.dispatchEvent(new CustomEvent("idiomachange", { detail: lang }));
   };
 
-  // API usada pelo script.js
+
   window.i18n = {
     t: (chave) => (mensagens[atual] && mensagens[atual][chave]) || mensagens.pt[chave] || chave,
     get lang() { return atual; },
