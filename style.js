@@ -15,21 +15,18 @@
 
   /* ============================================================
      FORMULÁRIO DE CONTATO
-     Fica no topo de propósito: se qualquer outro trecho do script
-     der erro, a validação continua funcionando e a página não
-     recarrega.
+     (se o index.html já tratou o formulário, este bloco é pulado)
      ============================================================ */
   const form = document.getElementById("form-contato");
   const formStatus = document.getElementById("form-status");
   const formErro = document.getElementById("form-erro");
 
-  if (form) {
+  if (form && !form.dataset.pronto) {
     const mostrarErroForm = (show) => {
       if (!formErro) return;
       formErro.hidden = !show;
       formErro.textContent = show ? t("erroForm") : "";
       if (show) {
-        // reinicia a animação de tremida a cada novo erro
         formErro.style.animation = "none";
         void formErro.offsetWidth;
         formErro.style.animation = "";
@@ -47,7 +44,6 @@
       const alvo = document.getElementById(`erro-${input.name}`);
       if (alvo) alvo.textContent = message;
       input.setAttribute("aria-invalid", String(Boolean(message)));
-      // quando todos os campos estiverem válidos, some o aviso geral
       if (!form.querySelector('[aria-invalid="true"]')) mostrarErroForm(false);
       return !message;
     };
@@ -62,7 +58,7 @@
     });
 
     form.addEventListener("submit", (e) => {
-      e.preventDefault(); // impede o recarregamento da página
+      e.preventDefault();
 
       if (formStatus) {
         formStatus.textContent = "";
@@ -87,7 +83,6 @@
       }
     });
 
-    // troca de idioma: atualiza as mensagens que já estão na tela
     document.addEventListener("idiomachange", () => {
       inputs.forEach((input) => {
         if (input.getAttribute("aria-invalid") === "true") validateField(input);
