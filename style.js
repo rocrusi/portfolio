@@ -1,9 +1,4 @@
-style.js
 
-/* =========================================================
-   Portfólio Pedro Kalil — comportamento
-   Módulos: revelar ao rolar, menu mobile, link ativo, filtro, formulário
-   ========================================================= */
 (() => {
   "use strict";
 
