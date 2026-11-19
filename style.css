@@ -1,4 +1,3 @@
-
 :root {
   --bg: #f3ead9;
   --surface: #faf5ea;
@@ -11,6 +10,7 @@
   --sombra: #14263a;
   --nome-azul: #4a86ff;
   --nome-verde: #9dbd57;
+  --erro: #b01c33;
   --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
   --body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --wrap: 70rem;
@@ -86,6 +86,7 @@ a { color: inherit; }
 
 @keyframes piscar { 50% { opacity: 0; } }
 @keyframes entrada { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes tremer { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 
 
 .section { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr); max-width: var(--wrap); margin: 0 auto; padding: clamp(2.5rem, 7vw, 4.5rem) var(--pad); border-top: 1px solid var(--line); }
@@ -152,8 +153,12 @@ body:has(dialog[open]) { overflow: hidden; }
 .field label { display: block; margin-bottom: .4rem; font-weight: 700; }
 .field input, .field textarea { width: 100%; padding: .8rem 1rem; font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
 .field input:hover, .field textarea:hover { border-color: var(--blue); }
-.field [aria-invalid="true"] { border-color: #ff7b88; }
-.error { min-height: 1.25rem; margin: .35rem 0 0; font-size: .9rem; color: #b01c33; }
+.field [aria-invalid="true"] { border: 2px solid var(--erro); background: #fff5f6; }
+.field [aria-invalid="true"]:focus-visible { outline-color: var(--erro); }
+.error { min-height: 1.25rem; margin: .35rem 0 0; font-size: .9rem; font-weight: 500; color: var(--erro); }
+.error:not(:empty)::before { content: "⚠ "; }
+.form-erro { margin: 0; padding: .75rem 1rem; text-align: center; font-weight: 700; color: #7a1022; background: #fde8eb; border: 2px solid var(--erro); box-shadow: 4px 4px 0 var(--erro); animation: tremer .4s ease-in-out; }
+.form-erro[hidden] { display: none; }
 .btn { justify-self: start; font: 700 1rem var(--body); padding: .85rem 1.6rem; min-height: 2.75rem; background: var(--blue); color: var(--on); border: 0; border-radius: 8px; cursor: pointer; }
 .btn:hover { filter: brightness(1.1); }
 .form-status { margin: 0; color: var(--green); font-weight: 700; }
@@ -237,4 +242,4 @@ h3 {
 #contato h2 { text-align: center; }
 #contato .form { width: 100%; margin-inline: auto; }
 #contato .btn { justify-self: center; }
-#contato .form-status, #contato .error { text-align: center; }
+#contato .form-status, #contato .error, #contato .form-erro { text-align: center; }
